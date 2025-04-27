@@ -54,7 +54,9 @@ In this project I engineered an entire simulated a real-world enterprise network
       Get-ADDomain
       ```
 
-📸 *(Screenshot suggestion: Output of `Get-ADDomain` confirming domain creation.)*
+<img width="526" alt="Screenshot 2025-04-27 at 6 16 21 PM" src="https://github.com/user-attachments/assets/79328d00-eb42-4150-bcf7-0b43aa2c3b1b" />
+<img width="521" alt="Screenshot 2025-04-27 at 6 18 47 PM" src="https://github.com/user-attachments/assets/f7193e32-0b2c-48d7-abc3-581d3cc15d9c" />
+
 
 ---
 
@@ -80,8 +82,10 @@ In this project I engineered an entire simulated a real-world enterprise network
 5. **Validation:**
     - Log into FinancePC1 with `corp\Administrator` credentials.
     - Confirm domain join via System Properties.
+   
   
-    - (insert picture of domain join)
+   <img width="524" alt="Screenshot 2025-04-27 at 6 24 05 PM" src="https://github.com/user-attachments/assets/f9dfff61-f73a-411e-9241-abd19ae797c0" />
+* *Notice Domain is corp.local, IP is 10.0.0.X* 
 
 ---
 
@@ -98,8 +102,12 @@ In this project I engineered an entire simulated a real-world enterprise network
   - Configured **TCP Data Inputs**:
     - Navigated to **Settings → Data Inputs → TCP → Add New**.
     - Created a new TCP Listener on **Port 9997** (default for forwarders).
+<img width="516" alt="Screenshot 2025-04-27 at 6 58 42 PM" src="https://github.com/user-attachments/assets/2d7840b9-1962-496d-9e05-3e28e331543b" />
 
-📸 *(Screenshot here: Splunk Data Inputs page showing port 9997 active)*
+<img width="507" alt="Screenshot 2025-04-27 at 6 42 23 PM" src="https://github.com/user-attachments/assets/a75b9cb2-7228-44a1-aee3-c22a29e58d66" />
+
+* *On Splunk Enterprise App. port 9997 verification is funky, but in screenshot you see port 9997 is listening* 
+
 
 #### Step 2: Install and Configure Splunk Universal Forwarder (FinancePC1)
 - Installed **Splunk Universal Forwarder** on **FinancePC1**.
@@ -108,7 +116,6 @@ In this project I engineered an entire simulated a real-world enterprise network
   - Set the destination IP address to **SplunkVM1’s static IP** (on TCP 9997).
 - Verified **Windows Firewall** was allowing outbound traffic to 9997.
 
-📸 *(Screenshot here: Forwarder settings or install wizard showing connection to SplunkVM1)*
 
 #### Step 3: Validate Log Forwarding
 - Logged into **Splunk Web** (`https://<SplunkVM1-IP>:8000`).
@@ -118,7 +125,10 @@ In this project I engineered an entire simulated a real-world enterprise network
   ```
 - Confirmed Security and Application logs were actively being received.
 
-📸 *(Screenshot here: Splunk search results showing real-time logs from FinancePC1)*
+<img width="522" alt="Screenshot 2025-04-27 at 6 30 36 PM" src="https://github.com/user-attachments/assets/43667b03-0e28-4a38-97b5-42184132425e" />
+
+* *This verifies Logs are being sent from Finance PC1 to Splunk Enterprise* 
+
 
 ---
 
@@ -173,18 +183,21 @@ After conducting attack simulations using Kali Linux (KaliVM), key security even
 
 #### 3. Screenshots
 
-📸 *(Screenshot suggestion: Show Splunk search results highlighting detected attacks — Event ID 4625 failures, suspicious PowerShell logs, network scan detections.)*
+<img width="516" alt="Screenshot 2025-04-27 at 7 13 29 PM" src="https://github.com/user-attachments/assets/e60b28dd-3a66-4f4e-af09-94602ab7b2f8" />
+
+* Using Splunk, we successfully ingested Windows security event logs from client machines on the "corp.local" domain.
+In this phase, we performed a search and identified multiple EventCode 5379 events, which are related to Credential Manager credentials being read.
+This confirmed that the Splunk server was correctly receiving and indexing logs from FinancePC1, and could detect key security events for monitoring and analysis.
 
 #### 4. Findings Summary
-
-- **FinancePC1** generated multiple failed login events during brute-force RDP simulation.
-- **Suspicious PowerShell activity** was logged when running test scripts from KaliVM.
-- **Network scans** triggered multiple blocked connections recorded in Firewall logs.
-- All relevant events were successfully forwarded to and detected in **SplunkVM1**.
+- FinancePC1 successfully generated Windows security events, including EventCode 5379, related to Credential Manager activity.
+- SplunkVM1 received and indexed all relevant log data from FinancePC1, confirming successful log forwarding and detection.
+- The system demonstrated the ability to collect, centralize, and search security events across the domain environment.
+- These findings validate the functionality of the SIEM setup and its readiness for detecting key security activities.
 
 ---
 
-## 📈 Planned Diagrams
+## 📈 Diagrams
 
 ### 1. Network Topology
 
@@ -203,7 +216,6 @@ After conducting attack simulations using Kali Linux (KaliVM), key security even
  (AD)         (Client)               (SIEM)      (Attacker)
 ```
 
-📸 *(Screenshot here: A simple network topology diagram made with draw.io or Lucidchart)*
 
 ### 2. Splunk Data Flow
 
@@ -211,7 +223,7 @@ After conducting attack simulations using Kali Linux (KaliVM), key security even
 FinancePC1 (Forwarder) ---> SplunkVM1 (Indexer/Search Head)
 ```
 
-📸 *(Screenshot here: Splunk showing logs forwarded from FinancePC1)*
+
 
 ---
 
