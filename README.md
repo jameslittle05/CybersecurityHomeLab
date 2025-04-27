@@ -4,7 +4,7 @@
 
 ## Overview
 
-In this project I engineered an entire simulated a real-world enterprise network infastructre, combining Windows Active Directory domain services with centralized security monitoring via Splunk. Built entirely on a singular macOS host machine using only VirtualBox virtual machines, the lab environment is designed to allow hands-on experience with system engineering/administration, network troubleshooting, SIEM data ingestion, and cyberattack simulation/remediation.
+In this project I engineered an entire simulated real-world enterprise network infastructure, combining Windows Active Directory domain services with centralized security monitoring via Splunk. Built entirely on a singular macOS host machine using only VirtualBox virtual machines, the lab environment is designed to allow hands-on experience with system engineering/administration, network troubleshooting, SIEM data ingestion, and cyberattack simulation/remediation.
 
 ---
 
