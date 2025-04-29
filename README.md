@@ -256,7 +256,7 @@ FinancePC1 (Forwarder) ---> SplunkVM1 (Indexer/Search Head)
 
 This lab environment replicates a small-to-medium enterprise network structure, integrating core IT and cybersecurity practices. It demonstrates a technical foundation in Windows Server management, Active Directory administration, endpoint deployment, Splunk SIEM operations, and attack monitoring.
 
-This project is ideal for inclusion in a professional GitHub portfolio or LinkedIn showcase to highlight real-world applicable cybersecurity and system administration skills.
+
 
 ---
 
